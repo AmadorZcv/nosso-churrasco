@@ -38,14 +38,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // Bind result variables
                     mysqli_stmt_bind_result($stmt, $username, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
-                        echo "<script>console.log( 'Debug Objects senha: " . $password . "' );</script>";
-                        echo "<script>console.log( 'Debug Objects: " . $hashed_password . "' );</script>";
                         if(password_verify($password, $hashed_password)){
                             /* Password is correct, so start a new session and
                             save the username to the session */
                             session_start();
                             $_SESSION['username'] = $username;      
-                            header("location: welcome.php");
+                            header("location: ../../tabs/index.php");
                         } else{
                             // Display an error message if password is not valid
                             $password_err = 'Senha invalida';
@@ -102,10 +100,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </form>
         </div>
         <div class="container">
-        <a HREF="../registerScreen/index.html">
+        <a HREF="../registerScreen/register.php">
         <button type="button" class="cancelbtn">Registrar</button></a>
         <span class="psw">Esqueceu
-            <a href="#">a senha?</a>
+            <a href="">a senha?</a>
         </span>
     </div>
 </body>
