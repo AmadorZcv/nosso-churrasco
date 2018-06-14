@@ -14,17 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Prepare a select statement
         $sql = "SELECT id FROM user WHERE user_name = ?";
-        echo "<script>console.log( 'Debug Objects: " . $sql . "' );</script>";
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $username);
-            echo "<script>console.log( 'paramdps Objects: " . $username . "' );</script>";
             // Set parameters
             $username = trim($_POST["username"]);
 
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
-                echo "<script>console.log( 'Executar: " . $username . "' );</script>";
                 /* store result */
                 mysqli_stmt_store_result($stmt);
 
@@ -65,21 +62,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
         // Prepare an insert statement
-        echo "<script>console.log( 'Log1' );</script>";
         $sql = "INSERT INTO user  (user_name,user_password) VALUES (?,?)";
-        echo "<script>console.log( 'Log2',$sql );</script>";
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ss", $username, $password);
 
             // Set parameters
             $password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-            echo "<script>console.log( 'O hash é', );</script>";
-            echo "<script>console.log( 'O hash é',$password );</script>";
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
-                echo "<script>console.log( 'O hash é',$password );</script>";
-                echo "<script>console.log( 'O hash é', );</script>";
+
                 // Redirect to login page
                 header("location: ../loginScreen/login.php");
             } else {
@@ -106,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         body{ font: 14px sans-serif; }
         .wrapper{ width: 350px; padding: 20px; }
     </style>
-<script>document.onload=getLocation()</script>
+    <script src="../../utilsJs/geolocation.js"></script>
 </head>
 <body onload="getLocation()">
 
@@ -133,28 +125,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
-            <p>Already have an account? <a href="login.php">Login here</a>.</p>
+            <p>Already have an account? <a href="../loginScreen/login.php">Login here</a>.</p>
         </form>
     </div>
 </body>
 </html>
-<script>
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(getEnderecoFromPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
-        function showPosition(position) {
-            console.log("A posição é ",position);
-        }
-        function getEnderecoFromPosition(position) {
-  console.log("Posição é ", position);
-  fetch(`http://maps.googleapis.com/maps/api/geocode/json?latlng=
-    ${position.coords.latitude},
-    ${position.coords.longitude}`)
-    .then(data => data.json())
-    .then(dataJson => console.log("dataJson é ", dataJson));
-}
-</script>

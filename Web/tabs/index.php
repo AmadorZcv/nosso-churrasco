@@ -1,3 +1,7 @@
+<?php
+session_start();
+$usuario = $_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,7 +25,7 @@
             <nav id="sidebar">
                 <div class="sidebar-header">
                 <img src="../assets/img/simboloPorcao.png" alt="Nosso Churrascao" class="porco">
-                    <h3>Nome do cara</h3>
+                    <h3><?php echo $usuario; ?></h3>
 
                 </div>
 
