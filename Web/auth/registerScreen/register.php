@@ -9,7 +9,7 @@ $username_err = $password_err = $confirm_password_err = "";
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate username
-    if (empty(trim($_POST["username"]))) {
+    if (empty(trim($_POST["username"]))) { // erro
         $username_err = "Please enter a username.";
     } else {
         // Prepare a select statement
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Validate password
-    if (empty(trim($_POST['password']))) {
+    if (empty(trim($_POST['password']))) { // erro
         $password_err = "Please enter a password.";
     } elseif (strlen(trim($_POST['password'])) < 1) {
         $password_err = "Password must have atleast 6 characters.";
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Validate confirm password
-    if (empty(trim($_POST["confirm_password"]))) {
+    if (empty(trim($_POST["confirm_password"]))) { // erro
         $confirm_password_err = 'Please confirm password.';
     } else {
         $confirm_password = trim($_POST['confirm_password']);
@@ -88,7 +88,88 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
+<html>
+    <head>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+    </head>
+
+    <body>
+
+
+        <div class="row">
+            <form class="col s12" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="row form_group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <div class="input-field col s6">
+                <input id="first_name" type="text" name="username" class="validate" value="<?php echo $username; ?>">
+                <label for="first_name">Nome do Usuário</label>
+                </div>
+            </div>
+            <div class="row form_group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                <div class="input-field col s12">
+                <input id="password" type="password" name="password" class="validate" value="<?php echo $password; ?>">
+                <label for="password">Senha</label>
+                </div>
+            </div>
+
+            <div class="row form_group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                <div class="input-field col s12">
+                <input id="password" type="password" name="confirm_password" class="validate" value="<?php echo $confirm_password; ?>">
+                <label for="password">Confirme sua senha</label>
+                </div>
+            </div>
+            <!--
+            <div class="row form_group">
+                <div class="input-field col s12">
+                    <input id="email" type="email" class="validate">
+                    <label for="email">E-mail</label>
+                    <span class="helper-text" data-error="E-mail invalido!" data-success="">example@email.com</span>
+                </div>
+            </div>
+            -->
+            <div class="row form_group">
+            <a class="waves-effect waves-teal btn-flat" type="reset" class="btn btn-default" value="reset">Resetar Campos</a>
+            <button class="btn waves-effect waves-light" type="submit" name="action" value="submit">Enviar
+            </button>
+            </div>
+            <p>Você já tem uma conta? <a href="../loginScreen/login.php">Entre aqui</a>.</p>
+            </form>
+        </div>
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+    </body>
+
+    <footer class="page-footer" style="background: #FF8F00">
+        <div class="container">
+            <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Você já tem uma conta?</h5>
+                        <p class="grey-text text-lighten-4"><a style="color: white" href="../loginScreen/login.php">Entre aqui!</p>
+                    </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">3L's</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Lucas Sales</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Lucas Amador</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Leonardo Ayres</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+            © 2014 Copyright Text
+            </div>
+        </div>
+        </footer>
+  </html>
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -116,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
-            <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+            <div class="form-group">
                 <label>Confirm Password</label>
                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
@@ -129,4 +210,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 </body>
-</html>
+</html> -->
