@@ -70,41 +70,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Pangolin" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="index.css">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <title>Login</title>
 </head>
 
-<body>
-    <img src="../../assets/img/simboloPorcao.png" alt="Nosso Churrascao" class="porco">
-    <h1 class="header">Nosso Churrasco</h1>
-
-    <div class="container">
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Nome de Usuário</label>
-                <input type="text" name="username" placeholder="Entre com o nome de usuário" value="<?php echo $username; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
+<body background="https://pixnio.com/free-images/2017/08/02/2017-08-02-09-14-23-1000x665.jpg">
+    <div class="valign-wrapper" style="width:100%;height:100%;position: absolute;">
+        <div class="valign" style="width:100%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col s6 center-align">
+                        <h3 class="header">Nosso Churrasco</h3>
+                        <img src="../../assets/img/simboloPorcao.png" alt="Nosso Churrascao" class="center-align">
+                    </div>
+                    <div class="col s6">
+                        <div>
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                                <div class="input-field">
+                                    <label for="username">Nome de usuario</label>
+                                    <input id="username" type="text" name="username" class="validate" value="<?php echo $username; ?>">
+                                    <span class="help-block">
+                                        <?php echo $username_err; ?>
+                                    </span>
+                                  
+                                </div>
+                                <div class="input-field">
+                                    <label>Senha</label>
+                                    <input type="password" name="password" class="form-control">
+                                    <button type="submit">Churrascar!!!</button>  <span class="help-block">
+                                        <?php echo $password_err; ?>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="buttonContainer">
+                            <a HREF="../registerScreen/register.php">
+                                <button type="button" class="cancelbtn">Registrar</button>
+                            </a>
+                            <button type="submit" class="recuperarbtn">Recuperar Senha</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Senha</label>
-                <input type="password" name="password" class="form-control">
-                <span class="help-block"><?php echo $password_err; ?></span>
-            </div>
-            <div class="form-group">
-            <button type="submit">Churrascar!!!</button>
-            </div>
-        </form>
         </div>
-        <div class="container">
-        <a HREF="../registerScreen/register.php">
-        <button type="button" class="cancelbtn">Registrar</button></a>
-        <span class="psw">Esqueceu
-            <a href="">a senha?</a>
-        </span>
     </div>
 </body>
 </html>
