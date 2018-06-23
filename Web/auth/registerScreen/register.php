@@ -3,22 +3,22 @@
 require_once '../../config.php';
 
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username = $password = $confirm_password = $email = $cpf = $userlogin = "";
+$username_err = $password_err = $confirm_password_err = $email_err = $cpf_err = $userlogin_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate username
-    if (empty(trim($_POST["username"]))) { // erro
-        $username_err = "Please enter a username.";
+    if (empty(trim($_POST["userlogin"]))) { // erro
+        $userlogin_err = "Entre com um nome de usuario";
     } else {
         // Prepare a select statement
-        $sql = "SELECT id FROM user WHERE user_name = ?";
+        $sql = "SELECT id FROM user WHERE user_login = ?";
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $username);
+            mysqli_stmt_bind_param($stmt, "s", $userlogin);
             // Set parameters
-            $username = trim($_POST["username"]);
+            $userlogin = trim($_POST["userlogin"]);
 
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
@@ -26,22 +26,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_stmt_store_result($stmt);
 
                 if (mysqli_stmt_num_rows($stmt) == 1) {
-                    $username_err = "This username is already taken.";
+                    $userlogin_err = "Nome de usuario já utilizado";
                 } else {
-                    $username = trim($_POST["username"]);
+                    $userlogin = trim($_POST["userlogin"]);
                 }
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
             }
         }
-
         // Close statement
         mysqli_stmt_close($stmt);
     }
 
     // Validate password
     if (empty(trim($_POST['password']))) { // erro
-        $password_err = "Please enter a password.";
+        $password_err = "Entre com uma senha";
     } elseif (strlen(trim($_POST['password'])) < 1) {
         $password_err = "Password must have atleast 6 characters.";
     } else {
@@ -50,32 +49,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate confirm password
     if (empty(trim($_POST["confirm_password"]))) { // erro
-        $confirm_password_err = 'Please confirm password.';
+        $confirm_password_err = 'Confirme a senha';
     } else {
         $confirm_password = trim($_POST['confirm_password']);
         if ($password != $confirm_password) {
-            $confirm_password_err = 'Password did not match.';
+            $confirm_password_err = 'Senhas são diferentes';
         }
     }
 
-    // Check input errors before inserting in database
-    if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
+    // Validate Email
+    if (empty(trim($_POST['email']))) { // erro
+        $email_err = "Entre com um email";
+    } else {
+        $email = trim($_POST['email']);
+    }
 
+    // Validate cpf
+    if (empty(trim($_POST['cpf']))) { // erro
+        $cpf_err = "Entre com o cpf";
+    } else {
+        $cpf = trim($_POST['cpf']);
+    }
+
+    // Validate username
+    if (empty(trim($_POST['username']))) { // erro
+        $username_err = "Entre com um nome";
+    } else {
+        $username = trim($_POST['username']);
+    }
+
+    // Check input errors before inserting in database
+    if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err) && empty($cpf_err) && empty($userlogin_err)) {
         // Prepare an insert statement
-        $sql = "INSERT INTO user  (user_name,user_password) VALUES (?,?)";
+        $sql = "INSERT INTO user(user_name,user_login,user_password,user_email,user_cpf,is_inative,is_bloqueado) VALUES (?,?,?,?,?,0,0)";
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+            mysqli_stmt_bind_param($stmt, "sssss",$username, $userlogin, $password,$email,$cpf);
 
             // Set parameters
             $password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            echo $email;
+            echo $cpf;
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
 
                 // Redirect to login page
                 header("location: ../loginScreen/login.php");
             } else {
-                echo "Something went wrong. Please try again later.";
+                echo "Something went wrong. Please try again later. Segundo";
             }
         }
 
@@ -96,42 +117,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-
+    <link rel="stylesheet" href="index.css">
     </head>
 
     <body>
 
-
+        <div class="container">
         <div class="row">
             <form class="col s12" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="row form_group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <div class="input-field col s6">
                 <input id="first_name" type="text" name="username" class="validate" value="<?php echo $username; ?>">
-                <label for="first_name">Nome do Usuário</label>
+                <label for="first_name">Nome Completo</label>
+                <span class="helper-text"><?php echo $username_err; ?></span>
+                </div> 
+                <div class="row form_group  <?php echo (!empty($userlogin_err)) ? 'has-error' : ''; ?>">
+                <div class="input-field col s6">
+                <input id="userlogin" type="text" name="userlogin" class="validate" value="<?php echo $userlogin; ?>">
+                <label for="userlogin">Nome de Usuário</label>
+                <span class="helper-text"><?php echo $userlogin_err; ?></span>
                 </div>
             </div>
+            </div>
+           
             <div class="row form_group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <div class="input-field col s12">
                 <input id="password" type="password" name="password" class="validate" value="<?php echo $password; ?>">
                 <label for="password">Senha</label>
+                <span class="helper-text"><?php echo $password_err; ?></span>
                 </div>
             </div>
 
-            <div class="row form_group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+            <div class="row form_group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
                 <div class="input-field col s12">
                 <input id="password" type="password" name="confirm_password" class="validate" value="<?php echo $confirm_password; ?>">
                 <label for="password">Confirme sua senha</label>
+                <span class="helper-text"><?php echo $confirm_password_err; ?></span>
                 </div>
             </div>
-            <!--
-            <div class="row form_group">
+        
+            <div class="row form_group  <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <div class="input-field col s12">
-                    <input id="email" type="email" class="validate">
+                    <input id="email" type="email" name="email" class="validate" value="<?php echo $email; ?>">
                     <label for="email">E-mail</label>
                     <span class="helper-text" data-error="E-mail invalido!" data-success="">example@email.com</span>
+                    <span class="helper-text"><?php echo $email_err; ?></span>
                 </div>
             </div>
-            -->
+            <div class="row form_group  <?php echo (!empty($cpf_err)) ? 'has-error' : ''; ?>">
+                <div class="input-field col s12">
+                    <input id="cpf" type="number" class="validate" name="cpf" value="<?php echo $cpf; ?>">
+                    <label for="cpf">CPF</label>
+                    <span class="helper-text">02681034172</span>
+                    <span class="helper-text"><?php echo $cpf_err; ?></span>
+                </div>
+            </div>
+           
             <div class="row form_group">
             <a class="waves-effect waves-teal btn-flat" type="reset" class="btn btn-default" value="reset">Resetar Campos</a>
             <button class="btn waves-effect waves-light" type="submit" name="action" value="submit">Enviar
@@ -140,8 +181,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p>Você já tem uma conta? <a href="../loginScreen/login.php">Entre aqui</a>.</p>
             </form>
         </div>
+        </div>
         <!--JavaScript at end of body for optimized loading-->
         <script type="text/javascript" src="js/materialize.min.js"></script>
+
     </body>
 
     <footer class="page-footer" style="background: #FF8F00">
@@ -159,11 +202,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <li><a class="grey-text text-lighten-3" href="#!">Leonardo Ayres</a></li>
                     </ul>
                 </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-            © 2014 Copyright Text
             </div>
         </div>
         </footer>
