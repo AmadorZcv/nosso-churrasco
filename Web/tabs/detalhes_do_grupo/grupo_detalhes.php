@@ -10,7 +10,7 @@
     </head>
     
     <body>
-    <a class="waves-effect waves-orange btn white lighten-3 black-text" style="left: 10; top: 10">Voltar</a>
+    <a class="waves-effect waves-orange btn white lighten-3 black-text" style="left: 10; top: 10" href="../index.php">Voltar</a>
     <br>
         <div class="container amber accent-2" id="grupo_detalhes_container">
             <!-- Informações do Grupo -->
@@ -98,7 +98,5 @@
                 </div>
             </div>
         </div>
-
-    </body>
-      
+    </body> 
 </html>

@@ -35,7 +35,7 @@ $username = $_SESSION['username'];
                         <a href="#">Perfil</a>
                     </li>
                     <li>
-                        <a href="../tabs/detalhes_do_grupo/grupo_detalhes.php">Grupos</a>
+                        <a href="../tabs/grupo/grupo.php">Grupos</a>
                     </li>
                     <li>
                         <a href="#">Calculadoras</a>
