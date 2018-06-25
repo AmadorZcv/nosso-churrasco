@@ -28,7 +28,7 @@ $userid = $_SESSION['userid'];
                         <ul class="collection" style="position:absolute; width:815; height:255; z-index:1; overflow: auto">
             <?php
 require_once '../../config.php';
-$sql = "SELECT B.churras_name, B.churras_datetime, B.churras_ds_adress, B.churras_image
+$sql = "SELECT B.churras_name, B.churras_datetime, B.churras_ds_adress, B.churras_image,B.id
                 FROM user_has_churrasco A
                 INNER JOIN churrasco B ON B.id = A.churrasco_id
                 WHERE A.user_id = ?";
@@ -48,13 +48,14 @@ if ($stmt = mysqli_prepare($link, $sql)) {
             $churrasDatetime = $row["churras_datetime"];
             $churrasAdress = $row["churras_ds_adress"];
             $churrasImage = $row["churras_image"];
+            $churrasId = $row["id"];
             echo "<li class='$collection'>";
             echo "<i class='$materialIcons'>";
             echo "<div class='$grupoImagem' align='center'>";
             echo " <img src='../../assets/img/simboloPorcao.png' alt='imagem do grupo' style='width: 50px; height: 50px'>";
             echo "</div>";
             echo "</i>";
-            echo "<a class='title' href='../detalhes_do_grupo/grupo_detalhes.php'>'$churrasName'</a>";
+            echo "<a class='title' href='../detalhes_do_grupo/grupo_detalhes.php?churrasId=$churrasId'>'$churrasName'</a>";
             echo "<p>'$churrasDatetime'</p>";
             echo "<p>PAGOU A COLETA";
             echo "</p>";

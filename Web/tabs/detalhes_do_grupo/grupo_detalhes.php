@@ -1,3 +1,9 @@
+<?php
+session_start();
+$userid = $_SESSION['userid'];
+$churrascoId = $_GET['churrasId'];
+?>
+
 <html>
 <head>
 
@@ -8,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <link rel="stylesheet" href="index.css">
     </head>
-    
+
     <body>
     <a class="waves-effect waves-orange btn white lighten-3 black-text" style="left: 10; top: 10" href="../index.php">Voltar</a>
     <br>
@@ -21,7 +27,7 @@
                         <img src="../../assets/img/simboloPorcao.png" alt="imagem do grupo" style="width: 250px; height: 250px">
                         <br>
                         <span class="card-title"><b>Nome do Grupo</b></span>
-                    </div>  
+                    </div>
                     <div class="card-content">
                     <p>Adicionar a porcetagem da coleta.</p>
                     </div>
@@ -62,14 +68,14 @@
                     </div>
                 </div>
 
-                
+
                 <!-- Membros do Grupo -->
                 <div class="row">
                     <div class="col s11 ">
                     <div class="card white">
                         <div class="card-content s12 black-text">
                         <span class="card-title black-text" align="center"><b>Membros do Grupo:</b></span>
-                        
+
                         <ul class="collection" style="position:absolute; width:815; height:255; z-index:1; overflow: auto">
                             <li class="collection-item avatar">
                             <i class="material-icons circle">folder</i>
@@ -77,14 +83,14 @@
                             <p>PAGOU A COLETA
                             </p>
                             </li>
-                               
+
                             <li class="collection-item avatar">
                             <i class="material-icons circle green">insert_chart</i>
                             <span class="title">NOME</span>
                             <p>NÃO PAGOU A COLETA
                             </p>
                             </li>
-                                
+
                             <li class="collection-item avatar">
                             <i class="material-icons circle red">play_arrow</i>
                             <span class="title">NOME</span>
@@ -98,5 +104,5 @@
                 </div>
             </div>
         </div>
-    </body> 
+    </body>
 </html>
