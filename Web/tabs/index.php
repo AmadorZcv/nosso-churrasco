@@ -1,6 +1,7 @@
 <?php
 session_start();
-$usuario = $_SESSION['username'];
+$username = $_SESSION['username'];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,7 +26,7 @@ $usuario = $_SESSION['username'];
             <nav id="sidebar">
                 <div class="sidebar-header">
                 <img src="../assets/img/simboloPorcao.png" alt="Nosso Churrascao" class="porco">
-                    <h3><?php echo $usuario; ?></h3>
+                    <h3><?php echo $username; ?></h3>
 
                 </div>
 
@@ -34,7 +35,7 @@ $usuario = $_SESSION['username'];
                         <a href="#">Perfil</a>
                     </li>
                     <li>
-                        <a href="#">Grupos</a>
+                        <a href="../tabs/detalhes_do_grupo/grupo_detalhes.php">Grupos</a>
                     </li>
                     <li>
                         <a href="#">Calculadoras</a>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Criar Grupo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="center-align">
+            <i id="upload" class="material-icons large">cloud_upload</i>
+        </div>
+        <div class="row z-depth-1" style="height: 80%;">
+            <div class="col s5">
+                <table class="striped centered">
+                    <thead>
+                        <tr>
+                            <th class="center-align">Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list">
+
+                    </tbody>
+                </table>
+                <div class="row" style="padding-top: 20px">
+                    <div class="col s10">
+                        <input id="nome" type="text" class="validate">
+                        <label for="nome">Nome do participante</label>
+                    </div>
+                    <div class="right-align col s2">
+                        <a class="btn-floating btn-large cyan pulse" onclick="addNome(' pedrinho ')">
+                            <i class="material-icons">add</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s7">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">create</i>
+                    <input id="nome" type="text" class="validate">
+                    <label for="nome">Nome do churrasco</label>
+                </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">edit_location</i>
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Local</label>
+                </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">date_range</i>
+                    <input id="icon_telephone" type="text" class="datepicker">
+                    <label for="icon_telephone">Data do churrasco</label>
+                </div>
+            </div>
+        </div>
+        <div class="center-align">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Enviar
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>
