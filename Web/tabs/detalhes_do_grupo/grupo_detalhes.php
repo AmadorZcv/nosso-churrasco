@@ -2,6 +2,42 @@
 session_start();
 $userid = $_SESSION['userid'];
 $churrascoId = $_GET['churrasId'];
+$churrasname;
+$churras_datetime;
+$churrasAdress;
+$churras_image;
+
+require_once '../../config.php';
+$sql = "SELECT B.churras_name, B.churras_datetime, B.churras_ds_adress, B.churras_image
+                                        FROM churrasco B
+                                        WHERE B.id = ?";
+if ($stmt = mysqli_prepare($link, $sql)) {
+    // Bind variables to the prepared statement as parameters
+    mysqli_stmt_bind_param($stmt, 'i', $churrascoId);
+    // Set parameters
+    // Attempt to execute the prepared statement
+    if (mysqli_stmt_execute($stmt)) {
+        // Store result
+        $result = mysqli_stmt_get_result($stmt);
+
+        while ($row = mysqli_fetch_array($result)) {
+            $churras_name = $row["churras_name"];
+            $churras_datetime = $row["churras_datetime"];
+            $churras_adress = $row["churras_ds_adress"];
+            $churras_image = $row["churras_image"];
+        }
+        // Check if username exists, if yes then verify password
+        if (mysqli_stmt_num_rows($stmt) == 1) {
+            // Bind result variables
+            mysqli_stmt_bind_result($stmt, $churras_name, $churras_datetime, $churras_adress, $churras_image);
+        }
+    } else {
+        echo "Oops! Something went wrong. Please try again later.";
+    }
+}
+
+mysqli_close($link);
+
 ?>
 
 <html>
@@ -26,13 +62,17 @@ $churrascoId = $_GET['churrasId'];
                     <div class="grupo-imagem" align="center">
                         <img src="../../assets/img/simboloPorcao.png" alt="imagem do grupo" style="width: 250px; height: 250px">
                         <br>
-                        <span class="card-title"><b>Nome do Grupo</b></span>
+                        <span class="card-title">
+                        <b>
+                        <?php echo $churras_name ?>
+                        </b>
+                        </span>
                     </div>
                     <div class="card-content">
                     <p>Adicionar a porcetagem da coleta.</p>
                     </div>
                     <div class="card-action">
-                    <a href="#">Sair do grupo.</a>
+                    <?php echo "<a class='title' href='../editar_grupo/index.php?churrasId=$churrascoId'>Editar Grupo</a>"; ?>
                     </div>
                 </div>
                 </div>
@@ -100,6 +140,9 @@ $churrascoId = $_GET['churrasId'];
                         </ul>
                     </div>
                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <div class="card-action">
+                    <a href="#">Sair do Grupo</a>
+                    </div>
                     </div>
                 </div>
             </div>
