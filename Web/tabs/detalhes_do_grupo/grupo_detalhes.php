@@ -35,9 +35,26 @@ if ($stmt = mysqli_prepare($link, $sql)) {
         echo "Oops! Something went wrong. Please try again later.";
     }
 }
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check if username is empty
+    $sql = "DELETE FROM  churrasco WHERE id = ?";
+    $churrascoId = trim($_POST['churrascoId']);
+    if ($stmt = mysqli_prepare($link, $sql)) {
+        // Bind variables to the prepared statement as parameters
+        mysqli_stmt_bind_param($stmt, 'i', $churrascoId);
+        // Set parameters
+        // Attempt to execute the prepared statement
+        if (mysqli_stmt_execute($stmt)) {
+            // Store result
+            header("location: ../../tabs/grupo/grupo.php");
+        } else {
+            echo "Oops! Something went wrong. Please try again later.";
+        }
+    }
+    // Close statement
+    mysqli_stmt_close($stmt);
+}
 mysqli_close($link);
-
 ?>
 
 <html>
@@ -142,6 +159,12 @@ mysqli_close($link);
                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                     <div class="card-action">
                     <a href="#">Sair do Grupo</a>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <button class="btn waves-effect waves-light" type="submit" name="action"></button>
+ <i class="material-icons right">delete</i>
+ <input id="churrascoId" name="churrascoId" type="hidden" class="timepicker" value="<?php echo $churrascoId; ?>">
+            </button>
+                    </form>
                     </div>
                     </div>
                 </div>

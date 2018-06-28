@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`churrasco` (
   CONSTRAINT `fk_churrasco_user1`
     FOREIGN KEY (`user_founder_id`)
     REFERENCES `nosso_churrasco`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
@@ -101,13 +101,13 @@ CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`compra` (
   CONSTRAINT `fk_compra_churrasco1`
     FOREIGN KEY (`churrasco_id`)
     REFERENCES `nosso_churrasco`.`churrasco` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_compra_tipo_pagamento1`
     FOREIGN KEY (`tipo_pagamento_id`)
     REFERENCES `nosso_churrasco`.`tipo_pagamento` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -145,8 +145,8 @@ CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`produtos` (
   CONSTRAINT `fk_produtos_parceiros1`
     FOREIGN KEY (`parceiros_id`)
     REFERENCES `nosso_churrasco`.`parceiros` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -166,13 +166,13 @@ CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`compra_has_produtos` (
   CONSTRAINT `fk_compras_has_produtos_compras1`
     FOREIGN KEY (`compras_id`)
     REFERENCES `nosso_churrasco`.`compra` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_compras_has_produtos_produtos1`
     FOREIGN KEY (`produtos_id`)
     REFERENCES `nosso_churrasco`.`produtos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -206,18 +206,18 @@ CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`dia_semana_has_parceiros` (
   CONSTRAINT `fk_dia_semana_has_parceiros_dia_semana1`
     FOREIGN KEY (`dia_semana_inicio_id`)
     REFERENCES `mydb`.`dia_semana` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_dia_semana_has_parceiros_dia_semana2`
     FOREIGN KEY (`dia_semana_final_id`)
     REFERENCES `mydb`.`dia_semana` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_dia_semana_has_parceiros_parceiros1`
     FOREIGN KEY (`parceiros_id`)
     REFERENCES `nosso_churrasco`.`parceiros` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -236,13 +236,13 @@ CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`user_has_churrasco` (
   CONSTRAINT `fk_user_has_churrasco_churrasco1`
     FOREIGN KEY (`churrasco_id`)
     REFERENCES `nosso_churrasco`.`churrasco` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_user_has_churrasco_user`
     FOREIGN KEY (`user_id`)
     REFERENCES `nosso_churrasco`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = ujis;
 
@@ -261,8 +261,8 @@ CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`notas` (
   CONSTRAINT `fk_notas_user_has_churrasco1`
     FOREIGN KEY (`user_has_churrasco_user_id` , `user_has_churrasco_churrasco_id`)
     REFERENCES `nosso_churrasco`.`user_has_churrasco` (`user_id` , `churrasco_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
@@ -281,13 +281,13 @@ CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`parceiros_has_classificacao` (
   CONSTRAINT `fk_parceiros_has_classificacao_classificacao1`
     FOREIGN KEY (`classificacao_id`)
     REFERENCES `mydb`.`classificacao` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_parceiros_has_classificacao_parceiros1`
     FOREIGN KEY (`parceiros_id`)
     REFERENCES `nosso_churrasco`.`parceiros` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

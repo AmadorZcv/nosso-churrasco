@@ -3,7 +3,6 @@
 require_once '../../config.php';
 
 $churrascoId = $_GET['churrasId'];
-
 $churrascoNome = $data = $local = $hora = "";
 $churrascoNome_err = $data_err = $local_err = $hora_err = "";
 
@@ -34,10 +33,8 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     } else {
         echo "Oops! Something went wrong. Please try again later.";
     }
+    mysqli_stmt_close($stmt);
 }
-
-mysqli_close($link);
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if username is empty
     if (empty(trim($_POST["churrascoNome"]))) {
@@ -64,19 +61,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Validate credentials
     if (empty($churrascoNome_err) && empty($data_err) && empty($local_err)) {
+        echo $churrascoId;
         // Prepare a select statement
         $sql = "UPDATE churrasco
         SET  churras_name 			= ?
             ,churras_datetime		= ?
             ,churras_ds_adress		= ?
             ,churras_image			= ?
-            ,user_founder_id		= ?
-        WHERE id = ?;
+        WHERE id = ?";
+        $churrascoId = trim($_POST['churrascoId']);
         $blob = "a";
         $dataFormatada = "${data} ${hora}:00";
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, 'ssssii', $churrascoNome, $dataFormatada, $local, $blob, $user_id, $churrasId);
+            mysqli_stmt_bind_param($stmt, 'ssssi', $churrascoNome, $dataFormatada, $local, $blob, $churrascoId);
             // Set parameters
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
@@ -175,7 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <?php echo $hora_err; ?>
                                     </span>
                     </div>
-
+                    <input id="churrascoId" name="churrascoId" type="hidden" class="timepicker" value="<?php echo $churrascoId; ?>">
             </div>
         </div>
         <div class="center-align">
