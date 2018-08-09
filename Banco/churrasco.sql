@@ -57,6 +57,21 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Table `nosso_churrasco`.`aud_churrasco`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `nosso_churrasco`.`aud_churrasco`;
+CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`aud_churrasco` (
+  `TABELA` VARCHAR(40),
+  `ACAO` VARCHAR(10),
+  `USUARIO` VARCHAR(70),
+  `DATA_HORA` DATETIME,
+  `CHAVE` VARCHAR(255),
+  `ANTES` VARCHAR(4000),
+  `DEPOIS` VARCHAR(4000)
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `nosso_churrasco`.`classificacao`
