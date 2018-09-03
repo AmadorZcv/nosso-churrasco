@@ -77,7 +77,7 @@ mysqli_close($link);
             <div class="row col s12">
                 <div class="col s6 m5">
                 <div class="card">
-                    <div class="grupo-imagem" align="center">
+                    <div class="grupo-imagem" style="text-align:center">
                         <img src="../../assets/img/simboloPorcao.png" alt="imagem do grupo" style="width: 250px; height: 250px">
                         <br>
                         <span class="card-title">
@@ -111,7 +111,7 @@ mysqli_close($link);
                     <div class="card white">
                         <div class="card-content white-text">
                         <span class="card-title black-text"><b>Lista de Compras:</b></span>
-                        <div class="collection" style="position:absolute; left:10px; width:440; height:130; z-index:1; overflow: auto">
+                        <div class="collection" style="position:absolute; width:90%; height:50%; z-index:1; overflow: auto">
                             <a href="#!" class="collection-item black-text">Carne</a>
                             <a href="#!" class="collection-item black-text">Arroz</a>
                             <a href="#!" class="collection-item black-text">Feijão</a>
@@ -120,7 +120,7 @@ mysqli_close($link);
                         <br><br><br><br><br><br>
                         </div>
                         <div class="card-action">
-                        <?php echo "<a class='title' href='../carrinho/index.php?churrasId=$churrascoId&loadProdutos=true'>Fazer Compras</a>"; ?>
+                        <a href="../carrinho/index.php">Fazer compras</a>
                         </div>
                     </div>
                     </div>
@@ -132,9 +132,9 @@ mysqli_close($link);
                     <div class="col s11 ">
                     <div class="card white">
                         <div class="card-content s12 black-text">
-                        <span class="card-title black-text" align="center"><b>Membros do Grupo:</b></span>
+                        <span class="card-title black-text" style="text-align:center"><b>Membros do Grupo:</b></span>
 
-                        <ul class="collection" style="position:absolute; width:815; height:255; z-index:1; overflow: auto">
+                        <ul class="collection" style="position:absolute; width:90%; height:53%; z-index:1; overflow: auto">
                             <li class="collection-item avatar">
                             <i class="material-icons circle">folder</i>
                             <span class="title">NOME</span>

@@ -1,7 +1,7 @@
 DELIMITER $$
 CREATE
-	TRIGGER `id6748281_nosso_churrasco`.`tr_aud_insert_churrasco` AFTER INSERT
-    ON `id6748281_nosso_churrasco`.`churrasco`
+	TRIGGER `nosso_churrasco`.`tr_aud_insert_churrasco` AFTER INSERT
+    ON `nosso_churrasco`.`churrasco`
     FOR EACH ROW 
     BEGIN
     

@@ -1,6 +1,6 @@
 DELIMITER $$
 CREATE
-	TRIGGER `nosso_churrasco`.`tr_delete_aud_churrasco` AFTER DELETE
+	TRIGGER `nosso_churrasco`.`tr_aud_delete_churrasco` AFTER DELETE
     ON `nosso_churrasco`.`churrasco`
     FOR EACH ROW BEGIN
     
@@ -9,3 +9,5 @@ CREATE
     
     END$$
 DELIMITER ;
+
+Drop trigger tr_aud_delete_churrasco; 

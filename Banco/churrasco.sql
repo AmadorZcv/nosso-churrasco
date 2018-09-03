@@ -130,8 +130,13 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `id6713534_nosso_churrasco`.`parceiros`
 -- -----------------------------------------------------
+<<<<<<< HEAD
 DROP TABLE IF EXISTS `id6713534_nosso_churrasco`.`parceiros`;
 CREATE TABLE IF NOT EXISTS `id6713534_nosso_churrasco`.`parceiros` (
+=======
+DROP TABLE IF EXISTS `nosso_churrasco`.`parceiros`;
+CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`parceiros` (
+>>>>>>> 36128595188625bc627ef7f2b731b9631a503afb
   `id` INT NOT NULL AUTO_INCREMENT,
   `cnpj` VARCHAR(14) NOT NULL,
   `parc_login` VARCHAR(45) NOT NULL,
@@ -149,8 +154,13 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `id6713534_nosso_churrasco`.`produtos`
 -- -----------------------------------------------------
+<<<<<<< HEAD
 DROP TABLE IF EXISTS `id6713534_nosso_churrasco`.`produtos`;
 CREATE TABLE IF NOT EXISTS `id6713534_nosso_churrasco`.`produtos` (
+=======
+DROP TABLE IF EXISTS `nosso_churrasco`.`produtos`;
+CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`produtos` (
+>>>>>>> 36128595188625bc627ef7f2b731b9631a503afb
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL DEFAULT NULL,
   `parceiros_id` INT NOT NULL,
