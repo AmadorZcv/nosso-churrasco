@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_stmt_execute($stmt)) {
 
                 // Redirect to login page
-                header("location: ../loginScreen/login.php");
+                header("location: ../loginUsuario/loginUsuarioScreen.php");
             } else {
                 echo "Something went wrong. Please try again later. Segundo";
             }
@@ -178,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button class="btn waves-effect waves-light" type="submit" name="action" value="submit">Enviar
             </button>
             </div>
-            <p>Você já tem uma conta? <a href="../loginScreen/login.php">Entre aqui</a>.</p>
+            <p>Você já tem uma conta? <a href="../loginUsuario/loginUsuarioScreen.php">Entre aqui</a>.</p>
             </form>
         </div>
         </div>
@@ -192,7 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="row">
                     <div class="col l6 s12">
                         <h5 class="white-text">Você já tem uma conta?</h5>
-                        <p class="grey-text text-lighten-4"><a style="color: white" href="../loginScreen/login.php">Entre aqui!</p>
+                        <p class="grey-text text-lighten-4"><a style="color: white" href="../loginUsuario/loginUsuarioScreen.php">Entre aqui!</p>
                     </div>
                 <div class="col l4 offset-l2 s12">
                     <h5 class="white-text">3L's</h5>

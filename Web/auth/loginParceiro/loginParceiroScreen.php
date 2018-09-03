@@ -3,15 +3,15 @@
 require_once '../../config.php';
 
 // Define variables and initialize with empty values
-$username = $password = "";
-$username_err = $password_err = "";
+$parcname = $password = "";
+$parcname_err = $password_err = "";
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if username is empty
-    if (empty(trim($_POST["username"]))) {
-        $username_err = 'Entre com um nome de usuario';
+    // Check if parcname is empty
+    if (empty(trim($_POST["parcname"]))) {
+        $parcname_err = 'Entre com um nome de usuario';
     } else {
-        $username = trim($_POST["username"]);
+        $parcname = trim($_POST["parcname"]);
     }
 
     // Check if password is empty
@@ -22,41 +22,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Validate credentials
-    if (empty($username_err) && empty($password_err)) {
+    if (empty($parcname_err) && empty($password_err)) {
         // Prepare a select statement
-        $sql = "SELECT user_login,user_password,id,user_name FROM user WHERE user_login= ?";
-        $user_id ="";
-        $user_name="";
+        $sql = "SELECT parc_login,parc_password,id,parc_fantasy_name FROM parceiros WHERE parc_login= ?";
+        $parc_id ="";
+        $parc_name="";
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, 's', $username);
+            mysqli_stmt_bind_param($stmt, 's', $parcname);
             // Set parameters
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
                 // Store result
                 mysqli_stmt_store_result($stmt);
-                // Check if username exists, if yes then verify password
+                // Check if parcname exists, if yes then verify password
                 if (mysqli_stmt_num_rows($stmt) == 1) {
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $username, $hashed_password,$user_id,$user_name);
+                    mysqli_stmt_bind_result($stmt, $parcname, $hashed_password,$parc_id,$parc_name);
                     if (mysqli_stmt_fetch($stmt)) {
                         if (password_verify($password, $hashed_password)) {
                             /* Password is correct, so start a new session and
-                            save the username to the session */
+                            save the parcname to the session */
                             echo "here";
                             session_start();
-                            $_SESSION['username'] = $username;
-                            $_SESSION['userid'] = $user_id;
-                            $_SESSION['username']=$user_name;
-                            header("location: ../../tabs/index.php");
+                            $_SESSION['parcname'] = $parcname;
+                            $_SESSION['parcid'] = $parc_id;
+                            $_SESSION['parcname']=$parc_name;
+                            header("location: ../../tabs/parceiros.php");
                         } else {
                             // Display an error message if password is not valid
                             $password_err = 'Senha invalida';
                         }
                     }
                 } else {
-                    // Display an error message if username doesn't exist
-                    $username_err = 'Não encontramos conta com esse nome';
+                    // Display an error message if parcname doesn't exist
+                    $parcname_err = 'Não encontramos conta com esse nome';
                 }
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
@@ -101,24 +101,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div>
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                 <div class="input-field">
-                                    <label for="username">Nome de usuario</label>
-                                    <input id="username" type="text" name="username" class="validate" value="<?php echo $username; ?>">
+                                    <label for="parcname">Nome de usuario</label>
+                                    <input id="parcname" type="text" name="parcname" class="validate" value="<?php echo $parcname; ?>">
                                     <span class="help-block">
-                                        <?php echo $username_err; ?>
+                                        <?php echo $parcname_err; ?>
                                     </span>
                                   
                                 </div>
                                 <div class="input-field">
                                     <label>Senha</label>
                                     <input type="password" name="password" class="form-control">
-                                    <button type="submit">Churrascar!!!</button>  <span class="help-block">
+                                    <button type="submit">Entrar</button>  <span class="help-block">
                                         <?php echo $password_err; ?>
                                     </span>
                                 </div>
                             </form>
                         </div>
                         <div class="buttonContainer">
-                            <a HREF="../registerScreen/register.php">
+                            <a HREF="../registerParceiroScreen/registerParceiro.php">
                                 <button type="button" class="cancelbtn">Registrar</button>
                             </a>
                             <button type="submit" class="recuperarbtn">Recuperar Senha</button>
