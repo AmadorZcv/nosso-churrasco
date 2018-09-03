@@ -130,7 +130,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `nosso_churrasco`.`parceiros`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nosso_churrasco`.`compra`;
+DROP TABLE IF EXISTS `nosso_churrasco`.`parceiros`;
 CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`parceiros` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `cnpj` VARCHAR(14) NOT NULL,
@@ -149,7 +149,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `nosso_churrasco`.`produtos`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nosso_churrasco`.`compra`;
+DROP TABLE IF EXISTS `nosso_churrasco`.`produtos`;
 CREATE TABLE IF NOT EXISTS `nosso_churrasco`.`produtos` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL DEFAULT NULL,
