@@ -24,8 +24,8 @@ $userid = $_SESSION['userid'];
                     <div class="col s11 ">
                     <div class="card white">
                         <div class="card-content s8 black-text">
-                        <span class="card-title black-text" align="center"><b>Grupos:</b></span>
-                        <ul class="collection" style="position:absolute; width:815; height:255; z-index:1; overflow: auto">
+                        <span class="card-title black-text" style="text-align:center"><b>Grupos:</b></span>
+                        <ul class="collection" style="position:absolute; width:95%; height:60%; z-index:1; overflow: auto">
             <?php
 require_once '../../config.php';
 $sql = "SELECT B.churras_name, B.churras_datetime, B.churras_ds_adress, B.churras_image,B.id
