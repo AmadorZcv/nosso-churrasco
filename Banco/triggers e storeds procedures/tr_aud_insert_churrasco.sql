@@ -10,4 +10,3 @@ CREATE
     INSERT INTO user_has_churrasco (user_id, churrasco_id, is_admin) values (NEW.user_founder_id,NEW.id,1);
     END$$
 DELIMITER ;
-Drop trigger tr_aud_insert_churrasco; 

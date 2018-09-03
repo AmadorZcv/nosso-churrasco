@@ -51,7 +51,7 @@ function add_to_carrinho()
     $churrascoId = $_GET['churrasId'];
     $produtoId = $_GET['produtoId'];
     $produtoPreco = $_GET['produtoPreco'];
-    $sql = "INSERT INTO `compra_has_produtos`(`compras_id`, `produtos_id`, `qtd`, `preco`) VALUES ($churrascoId,$produtoId,1,$produtoPreco)";
+    $sql = "INSERT INTO `compra_has_produtos`(`compras_id`, `produtos_id`, `qtd`, `preco`) VALUES ((select id from compra where churrasco_id = $churrascoId),$produtoId,1,$produtoPreco)";
     if ($stmt3 = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
         // Set parameters
@@ -70,13 +70,30 @@ if (isset($_GET['addProduto'])) {
     $churrascoId = $_GET['churrasId'];
     $produtoId = $_GET['produtoId'];
     $produtoPreco = $_GET['produtoPreco'];
-    $sql = "INSERT INTO `compra_has_produtos`(`compras_id`, `produtos_id`, `qtd`, `preco`) VALUES ($churrascoId,$produtoId,1,$produtoPreco)";
+    $sql = "INSERT INTO `compra_has_produtos`(`compras_id`, `produtos_id`, `qtd`, `preco`) VALUES ((select id from compra where churrasco_id = $churrascoId),$produtoId,1,$produtoPreco)";
     if ($stmt3 = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
         // Set parameters
         // Attempt to execute the prepared statement
         if (mysqli_stmt_execute($stmt3)) {
-            header("location: ../../tabs/carrinho/index.php?churrasId=6");
+            header("location: ../../tabs/carrinho/index.php?churrasId=$churrascoId");
+        } else {
+            echo "Oops! Something went wrong. Please try again later.";
+        }
+    }
+    mysqli_stmt_close($stmt3);
+}
+if(isset($_GET['deleteFromCarrinho'])){
+    $compraId = $_GET['compraId'];
+    $produtoId = $_GET['produtoId'];
+    $churrascoId=$_GET['churrasId'];
+    $sql= "DELETE FROM `compra_has_produtos` WHERE produtos_id = $produtoId and compras_id = $compraId";
+    if ($stmt3 = mysqli_prepare($link, $sql)) {
+        // Bind variables to the prepared statement as parameters
+        // Set parameters
+        // Attempt to execute the prepared statement
+        if (mysqli_stmt_execute($stmt3)) {
+            header("location: ../../tabs/carrinho/index.php?churrasId=$churrascoId");
         } else {
             echo "Oops! Something went wrong. Please try again later.";
         }
@@ -126,22 +143,47 @@ mysqli_stmt_close($stmt);
                 </div>
                 <div class="col s6">
                     <div class="col s12 m7 z-depth-2">
-                        <h2 class="header">Cerveja</h2>
-                        <div class="card horizontal">
-                            <div class="card-image">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6IJvYjhkvLkBDEgA0Myy9Xo1NWWt7Epxn7xvZWKXM8UwfL1ApJQ">
-                            </div>
-                            <div class="card-stacked">
-                                <div class="card-content">
-                                    <p>Fornecedor: Amador</p>
-                                    <p>Preço: 3.95</p>
-                                    <p>Quantidade: 1</p>
-                                </div>
-                                <div class=" red card-action">
-                                    <a href="#">Remover do carrinho</a>
-                                </div>
-                            </div>
-                        </div>
+                        <?php 
+                $churrascoId = $_GET['churrasId'];
+                $sql="SELECT compra_has_produtos.*,produtos.nome from compra_has_produtos 
+                inner join produtos on produtos.id=compra_has_produtos.produtos_id 
+                where compra_has_produtos.compras_id = (select id from compra where churrasco_id = $churrascoId)";
+                if ($stmt = mysqli_prepare($link, $sql)) {
+                    // Bind variables to the prepared statement as parameters
+                    // Set parameters
+                    // Attempt to execute the prepared statement
+                    if (mysqli_stmt_execute($stmt)) {
+                        // Store result
+                        $result = mysqli_stmt_get_result($stmt);
+                        $collection = "collection-item avatar";
+                        $materialIcons = "material-icons circle";
+                        $grupoImagem = "grupo-imagem";
+                        while ($row = mysqli_fetch_array($result)) {
+                            $produtoName = $row["nome"];
+                            $produtoPreco = $row["preco"];
+                            $produtoId = $row["produtos_id"];
+                            $compraId= $row["compras_id"];
+                            $qtd=$row["qtd"];
+                            echo "<div class='col s12 m7'>";
+                            echo "<h2 class='header'>$produtoName</h2>";
+                            echo "<div class='card horizontal'>";
+                            echo "<div class='card-stacked'>";
+                            echo "<div class='card-content'>";
+                            echo "<p>Preço: $produtoPreco</p>";
+                            echo "</div>";
+                            echo "<div class='red card-action'>";
+                            echo "<a href='index.php?deleteFromCarrinho=true&produtoId=$produtoId&compraId=$compraId&churrasId=$churrascoId'>Remover do carrinho</a>";;
+                            echo "</div>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                    } else {
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+                }
+                mysqli_stmt_close($stmt);
+                ?>
                     </div>
                 </div>
             </div>

@@ -51,7 +51,7 @@ if ($stmt = mysqli_prepare($link, $sql)) {
             echo "</div>";
             echo "</i>";
             echo "<p>$produtoNome</p>";
-            echo "<p>R$ $preco Kg</p>";
+            echo "<p>R$ $preco</p>";
             echo "</p>";
             echo "</li>";
         }

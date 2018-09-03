@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="row form_group <?php echo (!empty($parcname_err)) ? 'has-error' : ''; ?>">
                 <div class="input-field col s6">
                 <input id="first_name" type="text" name="parcname" class="validate" value="<?php echo $parcname; ?>">
-                <label for="first_name">Nome Completo</label>
+                <label for="first_name">Nome Fantasia</label>
                 <span class="helper-text"><?php echo $parcname_err; ?></span>
                 </div> 
                 <div class="row form_group  <?php echo (!empty($parclogin_err)) ? 'has-error' : ''; ?>">
