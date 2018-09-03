@@ -65,6 +65,7 @@ mysqli_close($link);
     <link rel="stylesheet" type="text/css" href="grupo-detalhes.css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     </head>
 
@@ -119,7 +120,7 @@ mysqli_close($link);
                         <br><br><br><br><br><br>
                         </div>
                         <div class="card-action">
-                        <a href="#">Fazer compras</a>
+                        <a href="../carrinho/index.php">Fazer compras</a>
                         </div>
                     </div>
                     </div>

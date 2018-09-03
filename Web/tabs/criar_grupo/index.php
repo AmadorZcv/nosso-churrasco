@@ -5,7 +5,7 @@ session_start();
 $user_id = $_SESSION['userid'];
 // Define variables and initialize with empty values
 $churrascoNome = $data = $local = $hora = "";
-$churrascoNome_err = $data_err = $local_err = $hora_err =  "";
+$churrascoNome_err = $data_err = $local_err = $hora_err = "";
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if username is empty
@@ -32,21 +32,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hora = trim($_POST['hora']);
     }
     // Validate credentials
-    if (empty($churrascoNome_err)&& empty($data_err)&& empty($local_err) ) {
+    if (empty($churrascoNome_err) && empty($data_err) && empty($local_err)) {
         // Prepare a select statement
-        $sql = "INSERT INTO churrasco (churras_name, 
+        $sql = "INSERT INTO churrasco (churras_name,
         churras_datetime, churras_ds_adress, churras_image, user_founder_id)
          VALUES(?,?,?,?,?)";
-        $blob="a";
+        $blob = "a";
         $dataFormatada = "${data} ${hora}:00";
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, 'ssssi', $churrascoNome , $dataFormatada ,$blob, $local,$user_id);
+            mysqli_stmt_bind_param($stmt, 'ssssi', $churrascoNome, $dataFormatada, $blob, $local, $user_id);
             // Set parameters
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
                 // Store result
-                header("location: ../../tabs/index.php");
+                header("location: ../../tabs/grupo/grupo.php");
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
             }
