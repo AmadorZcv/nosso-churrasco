@@ -120,7 +120,7 @@ mysqli_close($link);
                         <br><br><br><br><br><br>
                         </div>
                         <div class="card-action">
-                        <a href="../carrinho/index.php">Fazer compras</a>
+                        <?php echo "<a class='title' href='../carrinho/index.php?churrasId=$churrascoId&loadProdutos=true'>Fazer Compras</a>"; ?>
                         </div>
                     </div>
                     </div>
